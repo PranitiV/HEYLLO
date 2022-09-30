@@ -1,8 +1,6 @@
 import { View, Text, StyleSheet, TextInput } from 'react-native'
 import React from 'react'
 
-import { Feather } from 'react-native-vector-icons'
-
 const MessageInput = () => {
     return (
         <View style={styles.root}>
