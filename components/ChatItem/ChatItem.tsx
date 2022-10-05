@@ -1,12 +1,17 @@
 import React from "react";
 import { Text, View, Image, TouchableOpacity } from 'react-native';
-import Users from "../../assets/dummy-data/Users";
+import { useNavigation } from "@react-navigation/core";
 import { styles } from './styles'
 
 export default function ChatItem({ chatRoom }) {
   const user = chatRoom.users[1]
+
+  const navigation = useNavigation(); 
+  const onPress = () => {
+    navigation.navigate('ChatRoom', {id: chatRoom.id})
+  }
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress = {onPress}>
       <View style={styles.container}>
         <Image source={{ uri: user.imageUri }} style={styles.image} />
         {chatRoom.newMessages != null ? <View style={styles.noOfMess}>

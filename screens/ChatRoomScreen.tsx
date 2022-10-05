@@ -7,10 +7,14 @@ import Message from '../components/Messages/Message';
 import chatRoomData from '../assets/dummy-data/Chats'; 
 import MessageInput from '../components/MessageInput/MessageInput';
 
-
+import { useRoute, useNavigation } from '@react-navigation/core';
 
 export default function ChatRoomScreen() {
-    return (
+    const route = useRoute(); 
+    const navigation = useNavigation(); 
+    
+    navigation.setOptions({title: 'Praniti'})
+    return ( 
         <SafeAreaView style = {styles.page}>
             <FlatList 
                 data = {chatRoomData.messages}
