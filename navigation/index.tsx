@@ -5,7 +5,7 @@
  */
 import { FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme, DarkTheme, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { ColorSchemeName, Pressable } from 'react-native';
@@ -20,10 +20,12 @@ import ChatRoomScreen from '../screens/ChatRoomScreen';
 import HomeScreen from '../screens/HomeScreen'
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
+import { Feather } from '@expo/vector-icons';
 
 
 import { Entypo } from '@expo/vector-icons';
-import { Auth } from  'aws-amplify'; 
+import { Auth } from 'aws-amplify';
+import UsersScreen from '../screens/UsersScreen';
 
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
@@ -53,6 +55,12 @@ function RootNavigator() {
         name="ChatRoom"
         component={ChatRoomScreen}
         options={{ headerShown: true, headerTitle: ChatRoomHeader, headerBackTitle: 'Home', title: "name" }} />
+      <Stack.Screen
+        name="UsersScreen"
+        component={UsersScreen}
+        options={{
+          title: 'Users'
+        }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
     </Stack.Navigator>
   );
@@ -118,9 +126,9 @@ function TabBarIcon(props: {
 }
 
 const HomeHeader = (props) => {
-
+  const navigation = useNavigation();
   const logout = () => {
-    Auth.signOut(); 
+    Auth.signOut();
   }
   return (
     <View style={{
@@ -137,8 +145,10 @@ const HomeHeader = (props) => {
         fontWeight: 'bold',
         textAlign: 'center'
       }}>H E Y L L O</Text>
-
-      <Entypo name="log-out" size={24} color="black" style={{ right: 0, position: 'absolute' }} onPress = {logout}/>
+      <Pressable onPress={() => { navigation.navigate('UsersScreen') }} style={{ flex: 1 }}>
+        <Feather name="users" size={24} color="black" style={{ position: 'absolute', right: 40 }} />
+      </Pressable>
+      <Entypo name="log-out" size={24} color="black" style={{ right: 0, position: 'absolute' }} onPress={logout} />
     </View>
   )
 }
