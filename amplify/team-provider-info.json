@@ -14,6 +14,15 @@
     "categories": {
       "auth": {
         "HEYLLO": {}
+      },
+      "api": {
+        "HEYLLO": {}
+      },
+      "function": {
+        "HEYLLOPostConfirmation": {
+          "deploymentBucketName": "amplify-heyllo-staging-41831-deployment",
+          "s3Key": "amplify-builds/HEYLLOPostConfirmation-70774c6a55464e4a4646-build.zip"
+        }
       }
     }
   }

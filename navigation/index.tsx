@@ -21,6 +21,11 @@ import HomeScreen from '../screens/HomeScreen'
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
+
+import { Entypo } from '@expo/vector-icons';
+import { Auth } from  'aws-amplify'; 
+
+
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
     <NavigationContainer
@@ -44,10 +49,10 @@ function RootNavigator() {
         name="H E Y L L O"
         component={HomeScreen}
         options={{ headerShown: true, headerTitle: HomeHeader }} />
-      <Stack.Screen 
-      name="ChatRoom" 
-      component={ChatRoomScreen} 
-      options={{ headerShown: true, headerTitle: ChatRoomHeader, headerBackTitle: 'Home', title: "name"}} />
+      <Stack.Screen
+        name="ChatRoom"
+        component={ChatRoomScreen}
+        options={{ headerShown: true, headerTitle: ChatRoomHeader, headerBackTitle: 'Home', title: "name" }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
     </Stack.Navigator>
   );
@@ -113,26 +118,27 @@ function TabBarIcon(props: {
 }
 
 const HomeHeader = (props) => {
+
+  const logout = () => {
+    Auth.signOut(); 
+  }
   return (
     <View style={{
       flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
+      // alignItems: 'center',
+      // justifyContent: 'center',
       flex: 1,
+      marginLeft: 10,
+      marginRight: 20
     }}>
-
-      {/* <Image source={
-        { uri: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/jeff.jpeg' }}
-        style={{
-          width: 30,
-          height: 30,
-          borderRadius: 30,
-        }} /> */}
 
       <Text style={{
         fontSize: 18,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        textAlign: 'center'
       }}>H E Y L L O</Text>
+
+      <Entypo name="log-out" size={24} color="black" style={{ right: 0, position: 'absolute' }} onPress = {logout}/>
     </View>
   )
 }
@@ -140,9 +146,9 @@ const HomeHeader = (props) => {
 const ChatRoomHeader = (props) => {
 
   return (
-    <View> 
+    <View>
       <Text>{props.children}</Text>
     </View>
-      
+
   )
 }
